@@ -17,14 +17,17 @@ public class StudentGradeCalculator {
         boolean continueProgram = true;
 
         while (continueProgram) {
-            // Input Student Name
-            System.out.print("\nEnter Student Name: ");
-            scanner.nextLine(); // consume leftover newline
-            String studentName = scanner.nextLine();
+
 
             // Input number of subjects
-            System.out.print("Enter the number of subjects: ");
+            System.out.print("\nEnter the number of subjects: ");
             int numSubjects = scanner.nextInt();
+            scanner.nextLine(); // consume leftover newline after nextInt()
+
+            // Input Student Name
+            System.out.print("Enter Student Name: ");
+            String studentName = scanner.nextLine();
+
 
             String[] subjectNames = new String[numSubjects];
             int[] marks = new int[numSubjects];
@@ -35,8 +38,7 @@ public class StudentGradeCalculator {
             // Input marks and subject names
             for (int i = 0; i < numSubjects; i++) {
                 System.out.print("Enter name of subject " + (i + 1) + ": ");
-                scanner.nextLine(); // consume newline
-                subjectNames[i] = scanner.nextLine();
+                subjectNames[i] = scanner.nextLine(); // only this is needed
 
                 System.out.print("Enter marks for " + subjectNames[i] + " (out of 100): ");
                 int mark = scanner.nextInt();
@@ -53,7 +55,10 @@ public class StudentGradeCalculator {
                 // Track highest and lowest
                 if (mark > highest) highest = mark;
                 if (mark < lowest) lowest = mark;
+
+                scanner.nextLine(); // clear buffer after nextInt to prepare for next subject name
             }
+
 
             // Calculate average
             double average = (double) totalMarks / numSubjects;
@@ -91,16 +96,15 @@ public class StudentGradeCalculator {
             System.out.println("Lowest Marks: " + lowest);
             System.out.println("Remarks: " + remark);
 
+
             // Option to continue
             System.out.print("\nDo you want to calculate grades for another student? (yes/no): ");
-            scanner.nextLine(); // consume newline
-            String choice = scanner.nextLine().toLowerCase();
+            String choice = scanner.nextLine().toLowerCase(); // Just this one
             if (!choice.equals("yes")) {
                 continueProgram = false;
                 System.out.println("Thank you for using the Student Grade Calculator!");
             }
-        }
 
-        scanner.close();
+        }
     }
 }
